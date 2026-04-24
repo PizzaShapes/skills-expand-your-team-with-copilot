@@ -572,15 +572,15 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="share-buttons">
         <span class="share-label">Share:</span>
         <button class="share-btn share-twitter tooltip" aria-label="Share on X (Twitter)">
-          𝕏
+          <span aria-hidden="true">𝕏</span>
           <span class="tooltip-text">Share on X (Twitter)</span>
         </button>
         <button class="share-btn share-facebook tooltip" aria-label="Share on Facebook">
-          📘
+          <span aria-hidden="true">📘</span>
           <span class="tooltip-text">Share on Facebook</span>
         </button>
         <button class="share-btn share-copy tooltip" aria-label="Copy link">
-          🔗
+          <span aria-hidden="true">🔗</span>
           <span class="tooltip-text">Copy link</span>
         </button>
       </div>
@@ -621,6 +621,12 @@ document.addEventListener("DOMContentLoaded", () => {
       navigator.clipboard.writeText(`${shareText} ${shareUrl}`).then(() => {
         const tooltip = copyButton.querySelector(".tooltip-text");
         tooltip.textContent = "Copied!";
+        setTimeout(() => {
+          tooltip.textContent = "Copy link";
+        }, 2000);
+      }).catch(() => {
+        const tooltip = copyButton.querySelector(".tooltip-text");
+        tooltip.textContent = "Copy failed";
         setTimeout(() => {
           tooltip.textContent = "Copy link";
         }, 2000);
